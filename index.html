@@ -12,9 +12,25 @@
 <body>
   <div id="desktop" aria-label="Desktop" tabindex="-1">
     <div class="desktop-icons">
+      <button class="desktop-icon" data-app="explorer" title="Explorer">
+        <span class="icon explorer-icon" aria-hidden="true"></span>
+        <span class="label">Explorer</span>
+      </button>
       <button class="desktop-icon" data-app="notepad" title="Notepad">
         <span class="icon notepad-icon" aria-hidden="true"></span>
         <span class="label">Notepad</span>
+      </button>
+      <button class="desktop-icon" data-app="calculator" title="Calculator">
+        <span class="icon calculator-icon" aria-hidden="true"></span>
+        <span class="label">Calculator</span>
+      </button>
+      <button class="desktop-icon" data-app="paint" title="Paint">
+        <span class="icon paint-icon" aria-hidden="true"></span>
+        <span class="label">Paint</span>
+      </button>
+      <button class="desktop-icon" data-app="minesweeper" title="Minesweeper">
+        <span class="icon minesweeper-icon" aria-hidden="true"></span>
+        <span class="label">Minesweeper</span>
       </button>
     </div>
     <div id="windows" aria-live="polite" aria-relevant="additions removals"></div>
@@ -33,9 +49,25 @@
   <div id="start-menu" class="start-menu" role="menu" aria-label="Start menu" hidden>
     <div class="start-menu-inner">
       <div class="start-menu-section">
+        <button class="start-item" role="menuitem" data-app="explorer">
+          <span class="icon explorer-icon" aria-hidden="true"></span>
+          <span class="label">Explorer</span>
+        </button>
         <button class="start-item" role="menuitem" data-app="notepad">
           <span class="icon notepad-icon" aria-hidden="true"></span>
           <span class="label">Notepad</span>
+        </button>
+        <button class="start-item" role="menuitem" data-app="calculator">
+          <span class="icon calculator-icon" aria-hidden="true"></span>
+          <span class="label">Calculator</span>
+        </button>
+        <button class="start-item" role="menuitem" data-app="paint">
+          <span class="icon paint-icon" aria-hidden="true"></span>
+          <span class="label">Paint</span>
+        </button>
+        <button class="start-item" role="menuitem" data-app="minesweeper">
+          <span class="icon minesweeper-icon" aria-hidden="true"></span>
+          <span class="label">Minesweeper</span>
         </button>
       </div>
     </div>
