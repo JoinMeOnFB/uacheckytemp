@@ -1,0 +1,160 @@
+* { box-sizing: border-box; }
+:root {
+  --bg: #0a0a0a;
+  --desktop: #0f1115 url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&fit=crop') center/cover no-repeat fixed;
+  --glass: rgba(255,255,255,0.06);
+  --glass-2: rgba(255,255,255,0.1);
+  --border: rgba(255,255,255,0.12);
+  --text: #f5f7fb;
+  --text-dim: #c7c9d3;
+  --primary: #3b82f6;
+  --shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+html, body {
+  margin: 0;
+  height: 100%;
+  color: var(--text);
+  font: 14px/1.4 Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  background: var(--bg);
+}
+#desktop {
+  position: fixed;
+  inset: 0 0 42px 0;
+  background: var(--desktop);
+  overflow: hidden;
+}
+.desktop-icons {
+  padding: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 88px);
+  gap: 12px 14px;
+}
+.desktop-icon {
+  height: 88px;
+  width: 88px;
+  background: transparent;
+  border: 0;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+.desktop-icon:focus-visible, .desktop-icon:hover {
+  outline: 2px solid var(--primary);
+  background: rgba(59,130,246,0.1);
+}
+.desktop-icon .icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #fff5 0%, #fff0 50%), #1f2937;
+  margin-bottom: 8px;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.08), 0 1px 0 rgba(0,0,0,0.4);
+}
+.desktop-icon .label { text-shadow: 0 1px 2px rgba(0,0,0,0.6); }
+
+#taskbar {
+  position: fixed;
+  left: 0; right: 0; bottom: 0; height: 42px;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  background: linear-gradient(180deg, rgba(10,10,12,0.8), rgba(8,8,10,0.8));
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 0 8px;
+}
+.start-button {
+  height: 30px; width: 30px;
+  border-radius: 6px; border: 1px solid var(--border);
+  background: var(--glass);
+  color: var(--text);
+  display: grid; place-items: center;
+  cursor: pointer;
+}
+.start-button:hover { background: var(--glass-2); }
+.start-logo {
+  --c: #22c55e;
+  width: 16px; height: 16px; position: relative; display: inline-block;
+}
+.start-logo::before, .start-logo::after { content: ""; position: absolute; inset: 0; }
+.start-logo::before {
+  background:
+    linear-gradient(135deg, var(--c), transparent 60%),
+    linear-gradient(-45deg, var(--c), transparent 60%);
+  clip-path: polygon(0 0, 55% 0, 55% 45%, 0 45%);
+}
+.start-logo::after {
+  background:
+    linear-gradient(45deg, var(--c), transparent 60%),
+    linear-gradient(-135deg, var(--c), transparent 60%);
+  clip-path: polygon(45% 55%, 100% 55%, 100% 100%, 45% 100%);
+}
+.taskbar-sep { width: 8px; }
+.taskbar-apps { display: flex; gap: 6px; }
+.taskbar-spacer { flex: 1; }
+.taskbar-clock { font-variant-numeric: tabular-nums; opacity: 0.9; }
+
+.taskbar-app {
+  height: 30px; min-width: 36px; padding: 0 8px;
+  border-radius: 6px; border: 1px solid var(--border);
+  background: var(--glass);
+  color: var(--text);
+  display: inline-flex; align-items: center; gap: 8px;
+  cursor: pointer;
+}
+.taskbar-app.active { outline: 2px solid var(--primary); }
+.taskbar-app .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--primary); }
+
+.window {
+  position: absolute; min-width: 300px; min-height: 220px;
+  background: rgba(18,20,26,0.86);
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.window .titlebar {
+  height: 34px; display: flex; align-items: center; gap: 8px;
+  padding: 0 8px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  cursor: grab;
+}
+.titlebar .window-controls { margin-left: auto; display: flex; gap: 6px; }
+.window-control { width: 26px; height: 22px; border-radius: 6px; border: 1px solid var(--border); background: var(--glass); cursor: pointer; }
+.window-control:hover { background: var(--glass-2); }
+.window .content { padding: 10px; height: calc(100% - 34px); background: rgba(8,10,14,0.6); }
+
+/* Resize handles */
+.window .resize-handle { position: absolute; }
+.window .resize-handle.n { top: -3px; left: 8px; right: 8px; height: 6px; cursor: ns-resize; }
+.window .resize-handle.s { bottom: -3px; left: 8px; right: 8px; height: 6px; cursor: ns-resize; }
+.window .resize-handle.e { top: 8px; bottom: 8px; right: -3px; width: 6px; cursor: ew-resize; }
+.window .resize-handle.w { top: 8px; bottom: 8px; left: -3px; width: 6px; cursor: ew-resize; }
+.window .resize-handle.nw { top: -3px; left: -3px; width: 10px; height: 10px; cursor: nwse-resize; }
+.window .resize-handle.ne { top: -3px; right: -3px; width: 10px; height: 10px; cursor: nesw-resize; }
+.window .resize-handle.sw { bottom: -3px; left: -3px; width: 10px; height: 10px; cursor: nesw-resize; }
+.window .resize-handle.se { bottom: -3px; right: -3px; width: 10px; height: 10px; cursor: nwse-resize; }
+
+/* Notepad */
+.notepad {
+  display: grid; grid-template-rows: 28px 1fr;
+}
+.notepad .toolbar { display:flex; align-items:center; gap:6px; }
+.notepad .toolbar button { height:24px; padding: 0 8px; border-radius:6px; border:1px solid var(--border); background: var(--glass); color: var(--text); cursor:pointer; }
+.notepad .toolbar button:hover { background: var(--glass-2); }
+.notepad textarea { width:100%; height:100%; resize:none; border:0; outline:none; background: transparent; color: var(--text); font: 14px/1.6 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace; }
+
+/* Start menu */
+.start-menu { position: fixed; left: 8px; bottom: 50px; width: 360px; max-width: calc(100% - 16px); border-radius: 12px; border:1px solid var(--border); background: rgba(18,20,26,0.95); backdrop-filter: blur(10px); box-shadow: var(--shadow); }
+.start-menu-inner { padding: 10px; }
+.start-item { width: 100%; display:flex; align-items:center; gap:10px; padding:8px; border-radius:8px; border:1px solid var(--border); background: var(--glass); color: var(--text); cursor:pointer; }
+.start-item:hover { background: var(--glass-2); }
+
+/* Icons */
+.notepad-icon { background: linear-gradient(135deg, #fff5 0%, #fff0 50%), #2563eb; }
